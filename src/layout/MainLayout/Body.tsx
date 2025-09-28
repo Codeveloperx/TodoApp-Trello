@@ -1,5 +1,5 @@
-import { Header } from "../../components/header";
-import { Sidebar } from "../../components/sidebar";
+import { Header } from "../../components/Header/index";
+import { Sidebar } from "../../components/SideBar/index";
 
 type PropsType = {
   children: React.ReactNode;
