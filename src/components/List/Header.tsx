@@ -4,6 +4,8 @@ import MoreList from "./Options";
 type PropsType = {
   values: List;
   onAddList?: () => void;
+  onCollapse?: () => void;
+  isCollapsed: boolean;
 };
 
 const Header = (props: PropsType) => {
@@ -25,7 +27,9 @@ const Header = (props: PropsType) => {
 
           <div className="ml-4 flex-shrink-0">
             <MoreList
+              isCollapsed={props.isCollapsed}
               onAddList={props.onAddList}
+              onCollapsed={props.onCollapse}
             />
           </div>
         </div>
