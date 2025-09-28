@@ -1,0 +1,32 @@
+[
+  {
+    "name": "id",
+    "type": "text",
+    "hidden": true
+  },
+  {
+    "name": "task",
+    "label": "Tarea",
+    "placeholder": "Ingrese el título de la tarea",
+    "type": "text",
+    "required": true,
+    "errorMessage": "El campo titulo es obligatorio"
+  },
+  {
+    "name": "description",
+    "label": "Descripciòn",
+    "required": true,
+    "errorMessage": "El campo descripción es obligatorio",
+    "placeholder": "Ingrese la descripciòn de la tarea",
+    "type": "textarea"
+  },
+  {
+    "name": "priority",
+    "label": "Prioridad",
+    "placeholder": "Seleccione una opciòn",
+    "type": "select",
+    "errorMessage": "El campo prioridad es obligatorio",
+    "required": true,
+    "options": ["Low", "Medium", "High"]
+  }
+]

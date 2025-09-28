@@ -1,5 +1,5 @@
 import { Board } from "../../components/Board/index"
-import { MainLayout } from "../../layout/MainLayout/Index"
+import { MainLayout } from "../../layout/MainLayout"
 
 const Home = () => {
   return (

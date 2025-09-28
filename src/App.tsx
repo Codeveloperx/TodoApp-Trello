@@ -1,10 +1,11 @@
+import { BoardProvider } from "./context/BoardContext";
 import Home from "./pages/Home/Home";
 
 function App() {
   return (
-    <>
-    <Home/>
-    </>
+    <BoardProvider>
+      <Home />
+    </BoardProvider>
   );
 }
 

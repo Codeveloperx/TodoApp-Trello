@@ -1,1 +1,1 @@
-export { default as Sidebar } from "./body";
+export { default as Sidebar } from "./Body";
