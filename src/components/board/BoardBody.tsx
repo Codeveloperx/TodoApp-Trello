@@ -78,11 +78,10 @@ const BoardBody = () => {
   return (
     <div className="flex gap-4 overflow-x-auto items-start">
       {state.map((it) => (
-        <div key={it.id} className="w-64 flex-none">
+        <div key={it.id}>
           <ListBoard
             list={it}
             onAddTask={handleAddTask}
-            onAddColumn={() => setShowModal(true)}
             onUpdateTask={handleUpdateTask}
             onMoveTask={handleMoveTask}
           />
