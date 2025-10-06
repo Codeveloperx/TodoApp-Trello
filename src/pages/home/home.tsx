@@ -1,14 +1,14 @@
-import { Board } from "../../components/Board/index"
-import { MainLayout } from "../../layout/MainLayout"
+import { Board } from "../../components/Board/index";
+import { MainLayout } from "../../layout/MainLayout";
 
 const Home = () => {
   return (
     <div>
-        <MainLayout>
-            <Board/>
-        </MainLayout>
+      <MainLayout>
+        <Board />
+      </MainLayout>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

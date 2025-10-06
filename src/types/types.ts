@@ -5,11 +5,12 @@ export interface Task {
   task: string;
   description?: string;
   priority?: Priority;
+  position: number;
   status?: boolean;
 }
 
 export interface List {
-  id: number;
+  id: string;
   title: string;
   color?: string;
   tasks: Task[];
@@ -36,3 +37,22 @@ export interface FormHandle {
   clear: () => void;
   focus: (field: string) => void;
 }
+
+//prettier-ignore
+export interface DragOverData {
+  containerId: string;
+  index: number;
+}
+
+export interface DragData extends DragOverData {
+  id: string;
+}
+
+export type DragAndDropTypes = {
+  dragData: DragData | null;
+  dragOverData: DragOverData | null;
+  onDragEnd: () => void;
+  onDragStart: (fromList: string, task: Task, e: React.DragEvent) => void;
+  onDragEnter: (listId: string, taskIndex: number) => void;
+  onDrop: (toList: string, toIndex: number) => void;
+};

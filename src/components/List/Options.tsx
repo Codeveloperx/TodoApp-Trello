@@ -12,7 +12,7 @@ type PropsType = {
 
 const Options = (props: PropsType) => {
   const style =
-    "text-gray-500 hover:text-black focus:outline-none cursor-pointer";
+    "text-gray-500 hover:text-black focus:outline-none cursor-pointer hover:bg-gray-200 p-1 rounded-lg";
 
   return (
     <div className="flex items-center gap-2 text-gray-400 cursor-pointer hover:text-gray-600">

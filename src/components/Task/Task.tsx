@@ -1,6 +1,9 @@
 import { useRef, useState } from "react";
 import { FormWrapper } from "../Form/FormWrapper";
+import Modal from "../Modal/Modal";
 import fields from "../Form/fields.json";
+import { getPriorityColor } from "../../utils/getPriorityColor";
+import type { Fields, FormHandle, Task } from "../../types/types";
 import {
   CalendarDaysIcon,
   PencilSquareIcon,
@@ -12,9 +15,6 @@ import {
   KEY_PRIORITY,
   KEY_TASK,
 } from "../../constants/constant";
-import type { Fields, FormHandle, Task } from "../../types/types";
-import { getPriorityColor } from "../../utils/getPriorityColor";
-import Modal from "../Modal/Modal";
 
 type PropsType = {
   values: Task;
@@ -54,6 +54,7 @@ const TaskCard = (props: PropsType) => {
       task: values.task,
       description: values.description,
       priority: values.priority,
+      position: values.position,
     };
 
     props.onUpdate(updateTask);
@@ -63,7 +64,7 @@ const TaskCard = (props: PropsType) => {
   };
 
   return (
-    <div className="relative bg-white rounded-lg shadow-md p-4 mb-4 group">
+    <div className="relative bg-white rounded-lg shadow-md p-4 group">
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
@@ -92,7 +93,7 @@ const TaskCard = (props: PropsType) => {
             onClick={() => setIsModalOpen(true)}
             className="transition-opacity opacity-0 group-hover:opacity-100"
           >
-            <PencilSquareIcon className="h-4 w-4 text-gray-500 hover:text-black" />
+            <PencilSquareIcon className="h-4 w-4 text-gray-500 hover:text-black cursor-pointer" />
           </button>
         </div>
       )}

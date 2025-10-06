@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { FormWrapper } from "../Form/FormWrapper";
+import Dialog from "../Modal/Dialog";
 import formFields from "../Form/task.json";
 import type { Fields, FormHandle, Task } from "../../types/types";
-import Dialog from "../Modal/DIalog";
 
 type PropsTypes = {
   onAddTask: (task: Task) => void;
@@ -22,6 +22,7 @@ const Footer = (props: PropsTypes) => {
     const newTask: Task = {
       id: Date.now().toString(),
       task: values.task,
+      position: values.position,
     };
 
     props.onAddTask(newTask);
@@ -51,7 +52,7 @@ const Footer = (props: PropsTypes) => {
       ) : (
         <div
           onClick={() => setShowForm(true)}
-          className="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg text-gray-500 cursor-pointer hover:border-blue-400 hover:text-blue-500 transition-colors"
+          className="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-2 text-gray-500 cursor-pointer hover:border-blue-400 hover:text-blue-500 transition-colors"
         >
           <span className="text-sm font-medium">+ Add Card</span>
         </div>

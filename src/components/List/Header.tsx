@@ -1,5 +1,5 @@
 import type { List } from "../../types/types";
-import MoreList from "./Options";
+import Options from "./Options";
 
 type PropsType = {
   values: List;
@@ -26,7 +26,7 @@ const Header = (props: PropsType) => {
           </div>
 
           <div className="ml-4 flex-shrink-0">
-            <MoreList
+            <Options
               isCollapsed={props.isCollapsed}
               onAddList={props.onAddList}
               onCollapsed={props.onCollapse}

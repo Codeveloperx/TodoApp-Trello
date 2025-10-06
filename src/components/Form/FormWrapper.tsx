@@ -1,6 +1,6 @@
 import { forwardRef, useImperativeHandle, useState, useRef } from "react";
-import type { Fields, FormHandle } from "../../types/types";
 import Form from "./Form";
+import type { Fields, FormHandle } from "../../types/types";
 
 type PropsType = {
   data?: Record<string, unknown>;
