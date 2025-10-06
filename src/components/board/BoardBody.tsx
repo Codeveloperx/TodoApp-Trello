@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { useBoard } from "../../context/BoardContext";
-import ListBoard from "../List/List";
-import formFiels from "../Form/addList.json";
 import { FormWrapper } from "../Form/FormWrapper";
+import { useBoard } from "../../hooks/useBoard";
+import { useBoardActions } from "../../hooks/useBoardActions";
+import { useDragAndDrop } from "../../hooks/useDragAndDrops";
+import formFiels from "../Form/addList.json";
+import Dialog from "../Modal/Dialog";
+import { KEY_CANCEL, KEY_SAVE, KEY_TITLE } from "../../constants/constant";
 import type {
   Fields,
   FormHandle,
@@ -10,22 +13,39 @@ import type {
   Task,
   TaskType,
 } from "../../types/types";
-import {
-  ADD_COLUMN,
-  ADD_TASK,
-  KEY_CANCEL,
-  KEY_SAVE,
-  KEY_TITLE,
-  MOVE_TASK,
-  UPDATE_TASK,
-} from "../../constants/constant";
-import Dialog from "../Modal/DIalog";
+import ListWrapper from "../List/ListWrapper";
 
 const BoardBody = () => {
-  const { state, dispatch } = useBoard();
+  const { state } = useBoard();
   const [showModal, setShowModal] = useState(false);
+  const { addList, addTask, updateTask, moveTask } = useBoardActions();
+  const {
+    onDragStart,
+    onDragEnter,
+    onDragEnd,
+    onDrop,
+    dragData,
+    dragOverData,
+  } = useDragAndDrop();
 
   const formRef = useRef<FormHandle>(null);
+
+  const handleOnDrop = () => {
+    if (!dragData) return;
+
+    onDrop((drag, over) => {
+      if (!drag || !over) return;
+      moveTask(
+        drag.containerId,
+        over.containerId,
+        drag.id,
+        drag.index,
+        over.index ??
+          state.find((l) => l.id === over.containerId)?.tasks.length ??
+          0
+      );
+    });
+  };
 
   useEffect(() => {
     if (showModal) {
@@ -35,55 +55,41 @@ const BoardBody = () => {
     }
   }, [showModal]);
 
-  const onCloseModal = () => {
-    setShowModal(false);
-  };
-
-  const onOpenModal = () => {
-    setShowModal(true);
-  };
+  const onCloseModal = () => setShowModal(false);
+  const onOpenModal = () => setShowModal(true);
 
   const handleAddList = () => {
     const form = formRef.current;
     const values = form?.get();
-
     if (!values) return;
-    dispatch({ type: ADD_COLUMN, payload: values as ListType });
 
+    addList(values as ListType);
     form?.clear();
     setShowModal(false);
   };
 
-  const handleAddTask = (idList: number, content: TaskType) => {
-    dispatch({ type: ADD_TASK, payload: { idList, content } });
+  const handleAddTask = (idList: string, content: TaskType) => {
+    addTask(idList, content);
   };
 
-  const handleUpdateTask = (idList: number, data: Task) => {
-    dispatch({ type: UPDATE_TASK, payload: { idList, data } });
-  };
-
-  //FIXME: Validar esta funcionalidad.
-  const handleMoveTask = (fromList: number, toList: number, idTask: string) => {
-    const fromCol = state.find((l) => l.id === fromList);
-    if (!fromCol) return;
-
-    const fromIndex = fromCol.tasks.findIndex((t) => t.id === idTask);
-
-    dispatch({
-      type: MOVE_TASK,
-      payload: { fromList, toList, idTask, fromIndex, toIndex: 0 },
-    });
+  const handleUpdateTask = (idList: string, data: Task) => {
+    updateTask(idList, data);
   };
 
   return (
-    <div className="flex gap-4 overflow-x-auto items-start">
+    <div className="flex gap-4 overflow-x-auto">
       {state.map((it) => (
         <div key={it.id}>
-          <ListBoard
+          <ListWrapper
             list={it}
             onAddTask={handleAddTask}
             onUpdateTask={handleUpdateTask}
-            onMoveTask={handleMoveTask}
+            dragData={dragData}
+            dragOverData={dragOverData}
+            onDragEnd={onDragEnd}
+            onDragStart={onDragStart}
+            onDragEnter={onDragEnter}
+            onDrop={handleOnDrop}
           />
         </div>
       ))}

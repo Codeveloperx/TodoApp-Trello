@@ -1,5 +1,5 @@
-import { Header } from "../../components/Header/index";
-import { Sidebar } from "../../components/SideBar/index";
+import { Header } from "../../components/Header";
+import { Sidebar } from "../../components/SideBar";
 
 type PropsType = {
   children: React.ReactNode;
@@ -7,11 +7,13 @@ type PropsType = {
 
 const Body = (props: PropsType) => {
   return (
-    <div className="flex h-screen w-screen bg-gray-50">
+    <div className="flex h-screen">
       <Sidebar />
-      <div className="flex flex-col flex-1">
+      <div className="flex-1 flex flex-col overflow-hidden">
         <Header />
-        <main className="flex-1 overflow-x-auto p-4">{props.children}</main>
+        <main className="flex-1 bg-gray-50 overflow-x-auto overflow-y-auto p-6">
+          <div className="min-w-max">{props.children}</div>
+        </main>
       </div>
     </div>
   );

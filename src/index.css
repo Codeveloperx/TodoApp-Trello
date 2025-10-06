@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+/* Scroll horizontal custom */
+::-webkit-scrollbar {
+  height: 6px; /* alto de la barra horizontal */
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* fondo */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9ca3af; /*color del scroll*/
+  border-radius: 9999px; /* redondeado */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6b7280; /* hover */
+}

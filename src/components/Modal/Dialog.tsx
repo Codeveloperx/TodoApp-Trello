@@ -10,7 +10,7 @@ type PropsType = {
 
 const Dialog = (props: PropsType) => {
   return (
-    <div className="absolute bg-white border rounded shadow-lg p-3 w-60">
+    <div className="bg-white border rounded shadow-lg p-3 mt-2">
       {props.children}
       <div className="flex gap-2 mt-2">
         <Button text={props.confirmText} onClick={props.onConfirm} />
