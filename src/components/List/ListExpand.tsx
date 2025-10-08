@@ -1,8 +1,8 @@
-import { usePreviewTask } from "../../hooks/usePreviewTask";
+import { usePreviewTask } from "@/hooks/usePreviewTask";
 import TasksContainer from "../Task/TaskContainer";
 import Footer from "./Footer";
 import Header from "./Header";
-import type { DragAndDropTypes, List, Task, TaskType } from "../../types/types";
+import type { DragAndDropTypes, List, Task, TaskType } from "@/types/types";
 
 type PropsType = {
   list: List;

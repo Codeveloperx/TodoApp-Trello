@@ -1,6 +1,6 @@
 import { BarChart3, Home, List, Settings } from "lucide-react";
 
-export default function Sidebar() {
+const Sidebar = () => {
   return (
     <aside className="flex flex-col items-center w-16 bg-gray-800 text-white p-4">
       <h2 className="text-xl font-bold mb-4">Logo</h2>
@@ -25,4 +25,6 @@ export default function Sidebar() {
       </nav>
     </aside>
   );
-}
+};
+
+export default Sidebar;

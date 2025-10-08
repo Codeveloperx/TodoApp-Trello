@@ -13,7 +13,7 @@ const ListCollapsed = (props: PropsTypes) => {
       <div className="flex items-center justify-center gap-2 rotate-90">
         <span
           title={props.values.title}
-          className="truncate max-w-[80px] block font-medium text-xs ml-2"
+          className="uppercase truncate max-w-[80px] block font-medium text-xs ml-2"
         >
           {props.values.title}
         </span>

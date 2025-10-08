@@ -3,21 +3,26 @@ import { useEffect, useRef } from "react";
 type Props = {
   label: string;
   name: string;
-  value?: string;
+  value: string;
   onChange: (name: string, value: string) => void;
 };
 
-export function ColorPickerField(props: Props) {
+const DEFAULT_COLOR = "#459fe8";
+
+export function ColorPicker(props: Props) {
   //prettier-ignore
   const {
     name,
-    value = "#4299E1"
+    value = DEFAULT_COLOR
   } = props;
+
+  // Usar el valor por defecto si viene vacío
+  const currentValue = value || DEFAULT_COLOR;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    props.onChange(name, value);
+    props.onChange(name, DEFAULT_COLOR);
   }, []);
 
   const handleClick = () => {
@@ -33,7 +38,7 @@ export function ColorPickerField(props: Props) {
         id={name}
         ref={inputRef}
         type="color"
-        value={value}
+        value={currentValue}
         onChange={(e) => props.onChange(name, e.target.value)}
         className="h-8 w-8 cursor-pointer"
       />

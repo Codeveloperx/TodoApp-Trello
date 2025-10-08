@@ -1,8 +1,4 @@
-import {
-  ArrowsPointingInIcon,
-  ArrowsPointingOutIcon,
-  EllipsisHorizontalIcon,
-} from "@heroicons/react/24/outline";
+import { Shrink, Maximize2, Ellipsis } from "lucide-react";
 
 type PropsType = {
   onAddList?: () => void;
@@ -22,15 +18,15 @@ const Options = (props: PropsType) => {
         title="Contraer columnas"
       >
         {!props.isCollapsed ? (
-          <ArrowsPointingInIcon className="h-4 w-4" />
+          <Shrink className="h-4 w-4" />
         ) : (
-          <ArrowsPointingOutIcon className="h-4 w-4" />
+          <Maximize2 className="h-4 w-4" />
         )}
       </button>
 
       {!props.isCollapsed && (
         <button className={style} title="more">
-          <EllipsisHorizontalIcon className="h-5 w-5" />
+          <Ellipsis className="h-5 w-5" />
         </button>
       )}
     </div>

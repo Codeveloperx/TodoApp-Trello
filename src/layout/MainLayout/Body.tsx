@@ -1,11 +1,11 @@
-import { Header } from "../../components/Header";
-import { Sidebar } from "../../components/SideBar";
+import Header from "@/components/Header/Header";
+import Sidebar from "@/components/Sidebar/Sidebar";
 
 type PropsType = {
   children: React.ReactNode;
 };
 
-const Body = (props: PropsType) => {
+const Layout = (props: PropsType) => {
   return (
     <div className="flex h-screen">
       <Sidebar />
@@ -19,4 +19,4 @@ const Body = (props: PropsType) => {
   );
 };
 
-export default Body;
+export default Layout;

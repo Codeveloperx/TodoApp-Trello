@@ -1,4 +1,13 @@
-export type Priority = "No priority" | "Low" | "Medium" | "High";
+//prettier-ignore
+export type Action =
+  | { type: "ADD_LIST"; payload: ListType }
+  | { type: "DELETE_LIST"; payload: { idList: string } }
+  | { type: "ADD_TASK"; payload: { idList: string; content: TaskType } }
+  | { type: "UPDATE_TASK"; payload: { idList: string; data: Task } }
+  | { type: "DELETE_TASK"; payload: { idList: string; idTask: string } }
+  | { type: "MOVE_TASK"; payload: { fromList: string; toList: string; idTask: string; fromIndex: number; toIndex: number } };
+
+export type Priority = "Low" | "Medium" | "High" | undefined;
 
 export interface Task {
   id: string;
@@ -6,7 +15,7 @@ export interface Task {
   description?: string;
   priority?: Priority;
   position: number;
-  status?: boolean;
+  status: boolean;
 }
 
 export interface List {

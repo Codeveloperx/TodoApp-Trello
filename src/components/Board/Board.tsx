@@ -1,21 +1,21 @@
 import { useEffect, useRef, useState } from "react";
-import { FormWrapper } from "../Form/FormWrapper";
-import { useBoard } from "../../hooks/useBoard";
-import { useBoardActions } from "../../hooks/useBoardActions";
-import { useDragAndDrop } from "../../hooks/useDragAndDrops";
-import formFiels from "../Form/addList.json";
-import Dialog from "../Modal/Dialog";
-import { KEY_CANCEL, KEY_SAVE, KEY_TITLE } from "../../constants/constant";
+import { useBoard } from "@/hooks/useBoard";
+import { useBoardActions } from "@/hooks/useBoardActions";
+import { useDragAndDrop } from "@/hooks/useDragAndDrops";
+import { FormWrapper } from "../Common/Form/FormWrapper";
+import formFiels from "@/config/forms/addList.json";
+import Dialog from "../Common/Modal/Dialog";
+import ListWrapper from "../List/ListWrapper";
+import { KEY_CANCEL, KEY_SAVE, KEY_TITLE } from "@/constants/constant";
 import type {
   Fields,
   FormHandle,
   ListType,
   Task,
   TaskType,
-} from "../../types/types";
-import ListWrapper from "../List/ListWrapper";
+} from "@/types/types";
 
-const BoardBody = () => {
+const Board = () => {
   const { state } = useBoard();
   const [showModal, setShowModal] = useState(false);
   const { addList, addTask, updateTask, moveTask } = useBoardActions();
@@ -117,4 +117,4 @@ const BoardBody = () => {
   );
 };
 
-export default BoardBody;
+export default Board;

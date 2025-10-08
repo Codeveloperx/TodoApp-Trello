@@ -1,7 +1,6 @@
 import DraggableTask from "./DraggableTask";
-import DropZone from "./DropZone";
-import type { Task } from "../../types/types";
-import type { DragData } from "../../types/types";
+import DropZone from "../Common/DropZone/DropZone";
+import type { Task, DragData } from "@/types/types";
 
 type PropsTypes = {
   tasks: Task[];
@@ -37,7 +36,7 @@ const TasksContainer = (props: PropsTypes) => {
         />
       ))}
 
-      {props.showDropzoneAtEnd() && <DropZone position="end" />}
+      {props.showDropzoneAtEnd() && <DropZone.End />}
     </>
   );
 };

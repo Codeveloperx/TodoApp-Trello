@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { FormWrapper } from "../Form/FormWrapper";
-import Dialog from "../Modal/Dialog";
-import formFields from "../Form/task.json";
-import type { Fields, FormHandle, Task } from "../../types/types";
+import { FormWrapper } from "../Common/Form/FormWrapper";
+import Dialog from "../Common/Modal/Dialog";
+import formFields from "@/config/forms/addTask.json";
+import type { Fields, FormHandle, Task } from "@/types/types";
 
 type PropsTypes = {
   onAddTask: (task: Task) => void;
@@ -23,6 +23,7 @@ const Footer = (props: PropsTypes) => {
       id: Date.now().toString(),
       task: values.task,
       position: values.position,
+      status: false,
     };
 
     props.onAddTask(newTask);

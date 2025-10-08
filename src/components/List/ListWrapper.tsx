@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ListCollapsed from "./ListCollapsed";
 import ListExpand from "./ListExpand";
-import type { DragAndDropTypes, List, Task, TaskType } from "../../types/types";
+import type { DragAndDropTypes, List, Task, TaskType } from "@/types/types";
 
 type PropsType = {
   list: List;

@@ -1,8 +1,8 @@
 [
   {
     "name": "task",
-    "label": "Tarea",
-    "placeholder": "Ingrese el título de la tarea",
+    "label": "Title",
+    "placeholder": "Enter title...",
     "type": "text",
     "required": true,
     "errorMessage": "El campo tarea es obligatorio"

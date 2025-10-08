@@ -5,17 +5,8 @@ import {
   DELETE_TASK,
   MOVE_TASK,
   UPDATE_TASK,
-} from "../constants/constant";
-import type { List, ListType, Task, TaskType } from "../types/types";
-
-//prettier-ignore
-export type Action =
-  | { type: "ADD_LIST"; payload: ListType }
-  | { type: "DELETE_LIST"; payload: { idList: string } }
-  | { type: "ADD_TASK"; payload: { idList: string; content: TaskType } }
-  | { type: "UPDATE_TASK"; payload: { idList: string; data: Task } }
-  | { type: "DELETE_TASK"; payload: { idList: string; idTask: string } }
-  | { type: "MOVE_TASK"; payload: { fromList: string; toList: string; idTask: string; fromIndex: number; toIndex: number } };
+} from "@/constants/constant";
+import type { Action, List } from "@/types/types";
 
 export const boardReducer = (state: List[], action: Action): List[] => {
   switch (action.type) {

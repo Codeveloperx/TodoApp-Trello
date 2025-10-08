@@ -1,6 +1,6 @@
 import { Plus } from "lucide-react";
 
-export default function Header() {
+const Header = () => {
   return (
     <header className="h-14 bg-white border-b border-gray-200 px-6 flex items-center justify-between">
       <h1 className="text-lg font-semibold text-gray-800">Todo App</h1>
@@ -19,4 +19,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

@@ -1,15 +1,15 @@
 [
   {
     "name": "color",
-    "label": "Color Picker",
+    "label": "Color",
     "type": "color",
     "required": false,
     "errorMessage": "Debe seleccionar un color"
   },
   {
     "name": "title",
-    "label": "Titulo de la lista",
-    "placeholder": "Ingrese el título de la lista",
+    "label": "Title",
+    "placeholder": "Enter title...",
     "type": "text",
     "required": true,
     "errorMessage": "El campo titulo es obligatorio"

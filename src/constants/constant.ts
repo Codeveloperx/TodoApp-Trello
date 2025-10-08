@@ -21,8 +21,9 @@ export const FIELD_TEXTAREA = "textarea";
 export const FIELD_NUMBER = "number";
 export const FIELD_SELECT = "select";
 export const FIELD_COLOR = "color";
+export const FIELD_CHECKBOX = "checkbox";
 
-export const KEY_LOW = "LOW";
-export const KEY_MEDIUM = "MEDIUM";
-export const KEY_HIGH = "HIGH";
+export const KEY_LOW = "Low";
+export const KEY_MEDIUM = "Medium";
+export const KEY_HIGH = "High";
 export const KEY_NO_PRIORITY = "No priority";

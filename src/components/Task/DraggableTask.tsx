@@ -1,6 +1,6 @@
+import DropZone from "../Common/DropZone/DropZone";
 import TaskCard from "./Task";
-import DropZone from "./DropZone";
-import type { Task } from "../../types/types";
+import type { Task } from "@/types/types";
 
 type PropsTypes = {
   task: Task;
@@ -22,7 +22,7 @@ const DraggableTask = (props: PropsTypes) => {
   };
   return (
     <div className="flex flex-col" onDragEnter={props.onDragEnter}>
-      {props.showDropzone && <DropZone />}
+      {props.showDropzone && <DropZone.Start />}
 
       {!props.isHidden && (
         <div

@@ -1,12 +1,12 @@
-import { Board } from "../../components/Board/index";
-import { MainLayout } from "../../layout/MainLayout";
+import Board from "@/components/Board/Board";
+import Layout from "@/layout/MainLayout/Body";
 
 const Home = () => {
   return (
     <div>
-      <MainLayout>
+      <Layout>
         <Board />
-      </MainLayout>
+      </Layout>
     </div>
   );
 };

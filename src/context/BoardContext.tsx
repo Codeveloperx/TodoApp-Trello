@@ -1,7 +1,6 @@
 import { createContext } from "react";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { type Action } from "./boardReducer";
-import type { List } from "../types/types";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import type { Action, List } from "@/types/types";
 
 const initialState: List[] = [];
 
