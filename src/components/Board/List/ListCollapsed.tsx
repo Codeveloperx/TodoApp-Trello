@@ -1,4 +1,4 @@
-import type { List } from "../../types/types";
+import type { List } from "../../../types/types";
 import Options from "./Options";
 
 type PropsTypes = {

@@ -1,5 +1,4 @@
-import type { Action } from "../context/boardReducer";
-import type { ListType, Task, TaskType } from "../types/types";
+import type { ListType, Task, TaskType, Action } from "../types/types";
 import { useBoard } from "./useBoard";
 import {
   ADD_LIST,
@@ -10,7 +9,7 @@ import {
   UPDATE_TASK,
 } from "../constants/constant";
 
-export const useBoardActions = () => {
+const useBoardActions = () => {
   const { dispatch } = useBoard();
 
   const action = <T>(type: Action["type"], payload: T) => {
@@ -35,3 +34,5 @@ export const useBoardActions = () => {
     ) => action(MOVE_TASK, { fromList, toList, idTask, fromIndex, toIndex }),
   };
 };
+
+export default useBoardActions;

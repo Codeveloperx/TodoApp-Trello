@@ -1,10 +1,13 @@
 import { useMemo } from "react";
 import type { DragData, DragOverData, List } from "../types/types";
+import type { DragTaskData } from "@/components/Board/Board";
 
 export const usePreviewTask = (
   list: List,
-  dragData: DragData | null,
-  dragOverData: DragOverData | null
+  dragData: DragTaskData | null,
+  // dragData: DragData | null,
+  dragOverData: DragTaskData | null
+  // dragOverData: DragOverData | null
 ) => {
   const originalTasks = useMemo(
     () => [...list.tasks].sort((a, b) => a.position - b.position),
@@ -14,10 +17,14 @@ export const usePreviewTask = (
   const sameListDragging = useMemo(
     () =>
       !!(
-        dragData &&
-        dragOverData &&
-        dragData.containerId === list.id &&
-        dragOverData.containerId === list.id
+        (
+          dragData &&
+          dragOverData &&
+          // dragData.containerId === list.id &&
+          dragData.taskId === list.id &&
+          dragOverData.listId === list.id
+        )
+        // dragOverData.containerId === list.id
       ),
     [dragData, dragOverData, list.id]
   );
@@ -44,7 +51,8 @@ export const usePreviewTask = (
   const showDropzoneAtIndex = (index: number): boolean => {
     return (
       !!dragData &&
-      dragOverData?.containerId === list.id &&
+      // dragOverData?.containerId === list.id &&
+      dragOverData?.listId === list.id &&
       dragOverData.index === index
     );
   };
@@ -52,19 +60,21 @@ export const usePreviewTask = (
   const isDraggedTaskAtIndex = (index: number): boolean => {
     return (
       !!dragData &&
-      previewTasks[index].id === dragData.id &&
-      dragOverData?.containerId === list.id
+      previewTasks[index].id === dragData.taskId &&
+      dragOverData?.listId === list.id
+      // dragOverData?.containerId === list.id
     );
   };
 
   const isTaskBeingDragged = (taskId: string): boolean => {
-    return dragData?.id === taskId;
+    return dragData?.taskId === taskId;
   };
 
   const showDropzoneAtEnd = (): boolean => {
     return (
       !!dragData &&
-      dragOverData?.containerId === list.id &&
+      dragOverData?.listId === list.id &&
+      // dragOverData?.containerId === list.id &&
       dragOverData.index === list.tasks.length
     );
   };
@@ -228,10 +238,10 @@ export const usePreviewTask = (
 
 //    const showDropzoneAtIndex = (index: number): boolean => {
 //     if (!dragData || !dragOverData) return false;
-    
+
 //     // No mostrar si el índice es inválido
 //     if (index < 0 || index > list.tasks.length) return false;
-    
+
 //     return (
 //       dragOverData.containerId === list.id &&
 //       dragOverData.index === index &&
@@ -242,7 +252,7 @@ export const usePreviewTask = (
 
 //   const showDropzoneAtEnd = (): boolean => {
 //     if (!dragData || !dragOverData) return false;
-    
+
 //     return (
 //       dragOverData.containerId === list.id &&
 //       dragOverData.index >= previewTasks.length

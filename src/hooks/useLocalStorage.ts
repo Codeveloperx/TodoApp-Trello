@@ -5,7 +5,7 @@ import { KEY_BOARD } from "../constants/constant";
 
 const initialState: List[] = [];
 
-export function useLocalStorage() {
+const useLocalStorage = () => {
   const [state, dispatch] = useReducer(boardReducer, initialState, (init) => {
     const saved = localStorage.getItem("board");
     return saved ? (JSON.parse(saved) as List[]) : init;
@@ -16,4 +16,6 @@ export function useLocalStorage() {
   }, [state]);
 
   return { state, dispatch };
-}
+};
+
+export default useLocalStorage;

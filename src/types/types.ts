@@ -57,6 +57,15 @@ export interface DragData extends DragOverData {
   id: string;
 }
 
+export interface EnterDrag {
+  listId: string;
+  index: number;
+}
+
+export interface TaskWithList extends Task {
+  listId: string;
+}
+
 export type DragAndDropTypes = {
   dragData: DragData | null;
   dragOverData: DragOverData | null;

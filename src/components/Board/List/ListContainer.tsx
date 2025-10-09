@@ -2,14 +2,35 @@ import { useState } from "react";
 import ListCollapsed from "./ListCollapsed";
 import ListExpand from "./ListExpand";
 import type { DragAndDropTypes, List, Task, TaskType } from "@/types/types";
+import type { DragTaskData } from "../Board";
+
+// type PropsType = {
+//   list: List;
+//   onAddTask: (idList: string, data: TaskType) => void;
+//   onUpdateTask: (idList: string, data: Task) => void;
+//   //Event Drag and Drop
+//   onDragStart: (data: TaskWithList, e: React.DragEvent) => void;
+//   onDragEnter: (data: EnterDrag) => void;
+//   onDragEnd: () => void;
+//   dragData: DragData;
+//   dragOverData: EnterDrag | null;
+// };
+//  & DragAndDropTypes;
 
 type PropsType = {
   list: List;
   onAddTask: (idList: string, data: TaskType) => void;
   onUpdateTask: (idList: string, data: Task) => void;
-} & DragAndDropTypes;
+  // Drag and Drop con tipos unificados
+  onDragStart: (data: DragTaskData, e: React.DragEvent) => void;
+  onDragEnter: (data: DragTaskData) => void;
+  onDragEnd: () => void;
+  onDrop: (e: React.DragEvent, drag: DragTaskData, over: DragTaskData) => void;
+  dragData: DragTaskData | null;
+  dragOver: DragTaskData | null;
+};
 
-const ListWrapper = (props: PropsType) => {
+const ListContainer = (props: PropsType) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const borderColor = collapsed ? props.list.color : "";
@@ -32,9 +53,9 @@ const ListWrapper = (props: PropsType) => {
           onUpdateTask={props.onUpdateTask}
           onDragStart={props.onDragStart}
           onDragEnter={props.onDragEnter}
-          onDragEnd={props.onDragEnd}
+          // onDragEnd={props.onDragEnd}
           dragData={props.dragData}
-          dragOverData={props.dragOverData}
+          dragOverData={props.dragOver}
           onDrop={props.onDrop}
         />
       ) : (
@@ -47,4 +68,4 @@ const ListWrapper = (props: PropsType) => {
   );
 };
 
-export default ListWrapper;
+export default ListContainer;

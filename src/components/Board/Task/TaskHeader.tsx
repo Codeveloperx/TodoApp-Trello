@@ -1,4 +1,4 @@
-import { Checkbox } from "../Common/Form/Fields/Checkbox";
+import { Checkbox } from "@/components/Common/Form/Fields/Checkbox";
 
 type Props = {
   task: string;

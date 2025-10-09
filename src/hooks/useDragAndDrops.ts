@@ -1,51 +1,46 @@
 import { useState } from "react";
-import type { DragData, DragOverData, Task } from "../types/types";
 
-export const useDragAndDrop = () => {
-  const [dragData, setDragData] = useState<DragData | null>(null);
-  const [dragOverData, setDragOverData] = useState<DragOverData | null>(null);
+const useDragAndDrop = <T = unknown>() => {
+  const [dragData, setDragData] = useState<T | null>(null);
+  const [dragOver, setDragOver] = useState<T | null>(null);
 
-  const onDragStart = (fromList: string, task: Task, e: React.DragEvent) => {
-    const data: DragData = {
-      containerId: fromList,
-      index: task.position,
-      id: task.id,
-    };
+  const dragStart = (data: T, e: React.DragEvent) => {
+    e.stopPropagation();
 
     setDragData(data);
     e.dataTransfer.effectAllowed = "move";
-    const parsed = JSON.stringify(data);
-    e.dataTransfer.setData("text/plain", parsed);
+    e.dataTransfer.setData("text/plain", JSON.stringify(data));
   };
 
-  const onDragEnter = (listId: string, taskIndex: number) => {
-    const data: DragOverData = {
-      containerId: listId,
-      index: taskIndex,
-    };
-
-    setDragOverData(data);
+  const dragEnter = (data: T) => {
+    console.log(data, 'DATA ENTER')
+    setDragOver(data);
   };
 
-  const onDrop = (callback: (drag: DragData, over: DragOverData) => void) => {
-    if (!dragData || !dragOverData) return;
-    callback(dragData, dragOverData);
+  const onDrop = (e: React.DragEvent, callback: (drag: T, over: T) => void) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!dragData || !dragOver) return;
+    callback(dragData, dragOver);
 
     setDragData(null);
-    setDragOverData(null);
+    setDragOver(null);
   };
 
-  const onDragEnd = () => {
+  const dragEnd = () => {
     setDragData(null);
-    setDragOverData(null);
+    setDragOver(null);
   };
 
   return {
     dragData,
-    dragOverData,
-    onDragStart,
-    onDragEnter,
-    onDragEnd,
+    dragOver,
+    dragStart,
+    dragEnter,
+    dragEnd,
     onDrop,
   };
 };
+
+export default useDragAndDrop;
