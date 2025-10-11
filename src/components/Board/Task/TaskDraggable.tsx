@@ -1,25 +1,24 @@
-import DropZone from "../Common/DropZone/DropZone";
-import TaskCard from "./Task";
-import type { Task } from "@/types/types";
+import DropZone from "@/components/Common/DropZone/DropZone";
+import type { DragTaskData, Task } from "@/types/types";
 
 type PropsTypes = {
+  children?: React.ReactNode;
+  listId: string;
   task: Task;
   isDragging: boolean;
   showDropzone: boolean;
   isHidden: boolean;
-  onDragStart: (e: React.DragEvent<HTMLDivElement>, task: Task) => void;
-  onDragEnter: (e: React.DragEvent) => void;
-  onUpdate: (data: Task) => void;
+  onDragStart: (e: React.DragEvent, data: DragTaskData) => void;
+  onDragEnter: () => void;
 };
 
-const DraggableTask = (props: PropsTypes) => {
+const TaskDraggable = (props: PropsTypes) => {
+  const { listId, task } = props;
+
   const dragClasses = props.isDragging
-    ? "opacity-40 scale-105 rotate-2"
+    ? "opacity-80 scale-105 rotate-2"
     : "opacity-100 scale-100 rotate-0";
 
-  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    props.onDragStart(e, props.task);
-  };
   return (
     <div className="flex flex-col" onDragEnter={props.onDragEnter}>
       {props.showDropzone && <DropZone.Start />}
@@ -27,7 +26,13 @@ const DraggableTask = (props: PropsTypes) => {
       {!props.isHidden && (
         <div
           draggable
-          onDragStart={handleDragStart}
+          onDragStart={(e) =>
+            props.onDragStart(e, {
+              taskId: task.id,
+              index: task.position,
+              listId: listId,
+            })
+          }
           className={`
             cursor-grab
             active:cursor-grabbing
@@ -37,11 +42,11 @@ const DraggableTask = (props: PropsTypes) => {
             ${dragClasses}
           `}
         >
-          <TaskCard values={props.task} onUpdate={props.onUpdate} />
+          {props.children}
         </div>
       )}
     </div>
   );
 };
 
-export default DraggableTask;
+export default TaskDraggable;
