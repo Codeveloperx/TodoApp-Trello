@@ -6,7 +6,7 @@ type PropsType = {
   isCollapsed: boolean;
 };
 
-const Options = (props: PropsType) => {
+const ListOptions = (props: PropsType) => {
   const style =
     "text-gray-500 hover:text-black focus:outline-none cursor-pointer hover:bg-gray-200 p-1 rounded-lg";
 
@@ -33,4 +33,4 @@ const Options = (props: PropsType) => {
   );
 };
 
-export default Options;
+export default ListOptions;

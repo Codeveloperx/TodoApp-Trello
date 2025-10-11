@@ -1,4 +1,4 @@
-import type { ListType, Task, TaskType, Action } from "../types/types";
+import type { ListType, Task, TaskType, Action } from "@/types/types";
 import { useBoard } from "./useBoard";
 import {
   ADD_LIST,
@@ -7,9 +7,9 @@ import {
   DELETE_TASK,
   MOVE_TASK,
   UPDATE_TASK,
-} from "../constants/constant";
+} from "@/constants/constant";
 
-const useBoardActions = () => {
+export const useBoardActions = () => {
   const { dispatch } = useBoard();
 
   const action = <T>(type: Action["type"], payload: T) => {
@@ -34,5 +34,3 @@ const useBoardActions = () => {
     ) => action(MOVE_TASK, { fromList, toList, idTask, fromIndex, toIndex }),
   };
 };
-
-export default useBoardActions;

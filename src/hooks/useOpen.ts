@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useOpen = (initialValue = false) => {
+export const useOpen = (initialValue = false) => {
   const [isOpen, setIsOpen] = useState(initialValue);
 
   const onOpen = () => setIsOpen(true);
@@ -14,5 +14,3 @@ const useOpen = (initialValue = false) => {
     onToggle,
   };
 };
-
-export default useOpen;

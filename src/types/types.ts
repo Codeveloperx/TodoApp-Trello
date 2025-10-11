@@ -47,30 +47,33 @@ export interface FormHandle {
   focus: (field: string) => void;
 }
 
-//prettier-ignore
-export interface DragOverData {
-  containerId: string;
-  index: number;
-}
-
-export interface DragData extends DragOverData {
-  id: string;
-}
-
-export interface EnterDrag {
-  listId: string;
-  index: number;
-}
-
 export interface TaskWithList extends Task {
   listId: string;
 }
 
+export type DragTaskData = {
+  listId: string;
+  taskId?: string;
+  index: number;
+};
+
 export type DragAndDropTypes = {
-  dragData: DragData | null;
-  dragOverData: DragOverData | null;
+  dragData: DragTaskData | null;
+  dragOver: DragTaskData | null;
+  onDragStart: (e: React.DragEvent, data: DragTaskData) => void;
+  onDragEnter: (data: DragTaskData) => void;
   onDragEnd: () => void;
-  onDragStart: (fromList: string, task: Task, e: React.DragEvent) => void;
-  onDragEnter: (listId: string, taskIndex: number) => void;
-  onDrop: (toList: string, toIndex: number) => void;
+  onDrop: (callback: (drag: DragTaskData, over: DragTaskData) => void) => void;
+};
+
+export type ActionsTask = {
+  onAddTask: (idList: string, data: TaskType) => void;
+  onUpdateTask: (idList: string, data: Task) => void;
+  onMoveTask: (
+    fromList: string,
+    toList: string,
+    taskId: string,
+    fromIndex: number,
+    toIndex: number
+  ) => void;
 };

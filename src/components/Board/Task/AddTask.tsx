@@ -1,4 +1,4 @@
-import { AddItem } from "@/components/Common/Item/AddItem";
+import { AddItem } from "@/components/Common/AddItem/AddItem";
 import formAddTask from "@/config/forms/addTask.json";
 import type { Fields, TaskType } from "@/types/types";
 
@@ -8,7 +8,7 @@ type PropsType = {
   onAddTask: (idList: string, task: TaskType) => void;
 };
 
-const AddTask = (props: PropsType) => {
+export const AddTask = (props: PropsType) => {
   const handleAddTask = (values: Record<string, unknown>) => {
     if (!values) return;
 
@@ -29,5 +29,3 @@ const AddTask = (props: PropsType) => {
     </div>
   );
 };
-
-export default AddTask;

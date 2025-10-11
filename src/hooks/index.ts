@@ -1,5 +1,6 @@
-export { default as useOpen } from "./useOpen";
-export { default as useBoardActions } from "./useBoardActions";
-export { default as useDnD } from "./useDragAndDrops";
-export { default as useLocalStorage } from "./useLocalStorage";
-export { useBoard } from "./useBoard";
+export { useBoard } from "./Board/useBoard";
+export { useBoardActions } from "./Board/useBoardActions";
+export { useDragAndDrop } from "./Board/useDragAndDrop";
+export { useLocalStorage } from "./Board/useLocalStorage";
+export { useTaskDnD } from "./Task/useTaskDnD";
+export { useOpen } from "./useOpen";

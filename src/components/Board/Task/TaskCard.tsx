@@ -1,8 +1,7 @@
 import { FormWrapper } from "@/components/Common/Form/FormWrapper";
-import { TaskActions } from "./TaskActions";
-import { TaskFooter } from "./TaskFooter";
-import { TaskHeader } from "./TaskHeader";
-import { useRef, useState } from "react";
+import { TaskAction, TaskFooter, TaskHeader } from ".";
+import { useOpen } from "@/hooks";
+import { useRef } from "react";
 import fields from "@/config/forms/updateTask.json";
 import Modal from "@/components/Common/Modal/Modal";
 import {
@@ -20,7 +19,7 @@ type PropsType = {
 };
 
 const TaskCard = (props: PropsType) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isOpen, onOpen, onClose } = useOpen();
 
   const formRef = useRef<FormHandle>(null);
 
@@ -29,10 +28,6 @@ const TaskCard = (props: PropsType) => {
     [KEY_TASK]: props.values.task,
     [KEY_DESCRIPTION]: props.values.description,
     [KEY_PRIORITY]: props.values.priority,
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
   };
 
   const handleUpdate = () => {
@@ -44,7 +39,7 @@ const TaskCard = (props: PropsType) => {
     props.onUpdateTask(props.listId, { ...props.values, ...formValues });
 
     form?.clear();
-    setIsModalOpen(false);
+    onClose();
   };
 
   const handleCheckboxChange = (isChecked: boolean) => {
@@ -67,16 +62,13 @@ const TaskCard = (props: PropsType) => {
       </h3>
 
       {!props.values.status && (
-        <TaskActions
-          visible={!props.values.status}
-          onEdit={() => setIsModalOpen(true)}
-        />
+        <TaskAction visible={!props.values.status} onEdit={onOpen} />
       )}
 
       <TaskFooter priority={props.values.priority} />
 
-      {isModalOpen && (
-        <Modal onClose={handleCancel} onConfirm={handleUpdate}>
+      {isOpen && (
+        <Modal onClose={onClose} onConfirm={handleUpdate}>
           <FormWrapper
             ref={formRef}
             fields={fields as Fields[]}

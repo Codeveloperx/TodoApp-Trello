@@ -1,5 +1,5 @@
 import type { List } from "@/types/types";
-import Options from "./Options";
+import ListOptions from "./ListOptions";
 
 type PropsType = {
   values: List;
@@ -8,7 +8,7 @@ type PropsType = {
   isCollapsed: boolean;
 };
 
-const Header = (props: PropsType) => {
+const ListHeader = (props: PropsType) => {
   return (
     <>
       <div className="flex items-center justify-between px-4 pt-4">
@@ -26,7 +26,7 @@ const Header = (props: PropsType) => {
           </div>
 
           <div className="ml-4 flex-shrink-0">
-            <Options
+            <ListOptions
               isCollapsed={props.isCollapsed}
               onAddList={props.onAddList}
               onCollapsed={props.onCollapse}
@@ -43,4 +43,4 @@ const Header = (props: PropsType) => {
   );
 };
 
-export default Header;
+export default ListHeader;

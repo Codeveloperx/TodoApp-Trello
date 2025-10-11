@@ -1,88 +1,44 @@
-import { usePreviewTask } from "@/hooks/usePreviewTask";
-import AddTask from "../Task/AddTask";
-import Header from "./Header";
-import TasksContainer from "../Task/TaskContainer";
-import type {
-  DragAndDropTypes,
-  EnterDrag,
-  List,
-  Task,
-  TaskType,
-  TaskWithList,
-} from "@/types/types";
-import type React from "react";
-import type { DragTaskData } from "../Board";
+import { useTaskDnD } from "@/hooks";
+import { TaskContainer, AddTask } from "../Task";
+import ListHeader from "./ListHeader";
+import type { ActionsTask, DragAndDropTypes, List } from "@/types/types";
 
 type PropsType = {
   list: List;
   isCollapsed: boolean;
-  onAddTask: (idList: string, data: TaskType) => void;
-  onUpdateTask: (idList: string, data: Task) => void;
+  dndState: DragAndDropTypes;
   onCollapse: () => void;
-  //Props Drag and Drop
-  onDragStart: (data: DragTaskData, e: React.DragEvent) => void;
-  onDragEnter: (data: DragTaskData) => void;
-  dragData: DragTaskData | null;
-  dragOverData: DragTaskData | null;
-  onDrop: (e: React.DragEvent, drag: DragTaskData, over: DragTaskData) => void;
-};
-// & DragAndDropTypes;
+} & ActionsTask;
 
 const ListExpand = (props: PropsType) => {
-  const {
-    previewTasks,
-    showDropzoneAtIndex,
-    isDraggedTaskAtIndex,
-    isTaskBeingDragged,
-    showDropzoneAtEnd,
-  } = usePreviewTask(props.list, props.dragData, props.dragOverData);
-
-  const handleDrop = (e: React.DragEvent) => {
-    if (!e) return;
-    e.preventDefault();
-    if (props.dragOverData && props.dragData) {
-      props.onDrop(e, props.dragData, props.dragOverData);
-      // props.onDrop(props.list.id, props.dragOverData.index);
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    if (!e) return;
-    e.preventDefault();
-  };
-
-  const handleDragEnter = () => {
-    if (props.list.tasks.length === 0) {
-      props.onDragEnter({ listId: props.list.id, index: 0 });
-    }
-  };
+  const { list, dndState, onMoveTask } = props;
+  const dnd = useTaskDnD({ list, dndState, onMoveTask });
 
   return (
     <>
-      <Header
+      <ListHeader
         values={props.list}
         onCollapse={props.onCollapse}
         isCollapsed={props.isCollapsed}
       />
       <div
         className="p-4 flex flex-col gap-4"
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-        onDragEnter={() => props.onDragEnter}
+        onDragOver={dnd.handleDragOver}
+        onDrop={dnd.handleDrop}
+        onDragEnter={dnd.handleDragEnter}
       >
-        <TasksContainer
-          tasks={previewTasks}
+        <TaskContainer
           listId={props.list.id}
-          dragData={props.dragData}
-          showDropzoneAtIndex={showDropzoneAtIndex}
-          isDraggedTaskAtIndex={isDraggedTaskAtIndex}
-          isTaskBeingDragged={isTaskBeingDragged}
-          showDropzoneAtEnd={showDropzoneAtEnd}
-          onDragStart={props.onDragStart}
-          onDragEnter={handleDragEnter}
+          tasks={dnd.previewTasks}
+          dragData={dnd.dragData}
           onUpdateTask={props.onUpdateTask}
+          onDragStart={dnd.onDragStart}
+          onTaskDragEnter={dnd.handleTaskDragEnter}
+          showDropzoneAtIndex={dnd.showDropzoneAtIndex}
+          isDraggedTaskAtIndex={dnd.isDraggedTaskAtIndex}
+          isTaskBeingDragged={dnd.isTaskBeingDragged}
+          showDropzoneAtEnd={dnd.showDropzoneAtEnd}
         />
-
         <AddTask idList={props.list.id} onAddTask={props.onAddTask} />
       </div>
     </>

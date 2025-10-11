@@ -1,6 +1,5 @@
 type BaseProps = {
-  text?: string;
-  icon?: React.ReactNode;
+  text: string;
   className?: string;
   onClick: () => void;
 };
@@ -11,7 +10,6 @@ const BaseButton = (props: BaseProps) => (
     onClick={props.onClick}
     className={`text-white flex-1 px-3 py-1 rounded cursor-pointer ${props.className}`}
   >
-    {props.icon}
     {props.text}
   </button>
 );
@@ -25,12 +23,6 @@ const Button = {
   ),
   Delete: (props: BaseProps) => (
     <BaseButton {...props} className="bg-red-500 hover:bg-red-700" />
-  ),
-  Edit: (props: BaseProps) => (
-    <BaseButton
-      className="transition-opacity opacity-0 group-hover:opacity-100"
-      {...props}
-    />
   ),
 };
 

@@ -12,7 +12,7 @@ export const TaskHeader = ({ task, checked, onToggle }: Props) => (
       id={task}
       value={checked}
       onChange={onToggle}
-      className={`transition-opacity ${
+      className={`transition-opacity cursor-pointer ${
         checked ? "opacity-100" : "opacity-0 group-hover:opacity-100"
       }`}
     />

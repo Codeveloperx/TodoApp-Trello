@@ -1,4 +1,4 @@
-import { AddItem } from "@/components/Common/Item/AddItem";
+import { AddItem } from "@/components/Common/AddItem/AddItem";
 import formAddList from "@/config/forms/addList.json";
 import type { Fields, ListType } from "@/types/types";
 

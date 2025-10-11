@@ -1,5 +1,5 @@
 import type { List } from "../../../types/types";
-import Options from "./Options";
+import ListOptions from "./ListOptions";
 
 type PropsTypes = {
   values: List;
@@ -9,7 +9,7 @@ type PropsTypes = {
 const ListCollapsed = (props: PropsTypes) => {
   return (
     <div className="flex flex-col justify-around items-center h-full pb-8">
-      <Options isCollapsed onCollapsed={props.onExpand} />
+      <ListOptions isCollapsed onCollapsed={props.onExpand} />
       <div className="flex items-center justify-center gap-2 rotate-90">
         <span
           title={props.values.title}
