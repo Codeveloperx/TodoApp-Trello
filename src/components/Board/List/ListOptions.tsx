@@ -1,7 +1,6 @@
 import { Shrink, Maximize2, Ellipsis } from "lucide-react";
 
 type PropsType = {
-  onAddList?: () => void;
   onCollapsed?: () => void;
   isCollapsed: boolean;
 };

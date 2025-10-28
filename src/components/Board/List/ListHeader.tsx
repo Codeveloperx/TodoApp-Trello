@@ -1,17 +1,35 @@
 import type { List } from "@/types/types";
 import ListOptions from "./ListOptions";
+import { GripVertical } from "lucide-react";
 
 type PropsType = {
   values: List;
-  onAddList?: () => void;
-  onCollapse?: () => void;
+  onCollapse: () => void;
   isCollapsed: boolean;
+  onListDragStart: (e: React.DragEvent) => void;
+  isListDragging?: boolean;
 };
 
 const ListHeader = (props: PropsType) => {
   return (
     <>
-      <div className="flex items-center justify-between px-4 pt-4">
+      <div className="flex items-center gap-1 justify-between px-4 pt-4">
+        {props.onListDragStart && (
+          <div
+            draggable
+            onDragStart={(e) => {
+              props.onListDragStart(e);
+            }}
+            className={`
+            cursor-grab active:cursor-grabbing
+            text-gray-400 hover:text-gray-600
+            transition-colors
+            ${props.isListDragging ? "opacity-50" : "opacity-100"}
+          `}
+          >
+            <GripVertical size={20} />
+          </div>
+        )}
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <div className="flex items-center gap-2 min-w-0 flex-1">
             <h2
@@ -28,7 +46,6 @@ const ListHeader = (props: PropsType) => {
           <div className="ml-4 flex-shrink-0">
             <ListOptions
               isCollapsed={props.isCollapsed}
-              onAddList={props.onAddList}
               onCollapsed={props.onCollapse}
             />
           </div>

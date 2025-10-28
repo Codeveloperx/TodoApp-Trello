@@ -3,7 +3,10 @@ import {
   ADD_TASK,
   DELETE_LIST,
   DELETE_TASK,
+  MOVE_LIST,
   MOVE_TASK,
+  TOGGLE_LIST_COLLAPSE,
+  UPDATE_LIST,
   UPDATE_TASK,
 } from "@/constants/constant";
 import type { Action, List } from "@/types/types";
@@ -13,12 +16,32 @@ export const boardReducer = (state: List[], action: Action): List[] => {
     case ADD_LIST:
       return [
         ...state,
-        { id: crypto.randomUUID(), ...action.payload, tasks: [] },
+        {
+          id: crypto.randomUUID(),
+          ...action.payload,
+          collapse: false,
+          tasks: [],
+        },
       ];
 
     case DELETE_LIST:
       return state.filter((col) => col.id !== action.payload.idList);
 
+    case UPDATE_LIST: {
+      return state.map((list) =>
+        list.id === action.payload.idList
+          ? { ...list, ...action.payload.data }
+          : list
+      );
+    }
+
+    case TOGGLE_LIST_COLLAPSE: {
+      return state.map((list) =>
+        list.id === action.payload.idList
+          ? { ...list, collapse: !list.collapse }
+          : list
+      );
+    }
     case ADD_TASK:
       return state.map((it) =>
         it.id === action.payload.idList
@@ -109,6 +132,19 @@ export const boardReducer = (state: List[], action: Action): List[] => {
         if (it.id === toList) return { ...it, tasks: reorderedTarget };
         return it;
       });
+    }
+
+    case MOVE_LIST: {
+      const { from, to } = action.payload;
+
+      const newState = [...state];
+      const [movedList] = newState.splice(from, 1);
+      newState.splice(to, 0, movedList);
+
+      return newState.map((list, index) => ({
+        ...list,
+        position: index,
+      }));
     }
 
     default:

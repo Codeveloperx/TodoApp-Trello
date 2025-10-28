@@ -12,12 +12,16 @@ export const BoardContext = createContext<{
   dispatch: () => null,
 });
 
-export const BoardProvider = ({ children }: { children: React.ReactNode }) => {
-  const { state, dispatch } = useLocalStorage();
+type Propstype = {
+  children: React.ReactNode;
+};
+
+export const BoardProvider = (props: Propstype) => {
+  const { state, dispatch } = useLocalStorage("Board");
 
   return (
     <BoardContext.Provider value={{ state, dispatch }}>
-      {children}
+      {props.children}
     </BoardContext.Provider>
   );
 };

@@ -1,9 +1,10 @@
-import type { List } from "../../../types/types";
 import ListOptions from "./ListOptions";
+import type { List } from "@/types/types";
 
 type PropsTypes = {
   values: List;
   onExpand: () => void;
+  isCollapsed: boolean;
 };
 
 const ListCollapsed = (props: PropsTypes) => {

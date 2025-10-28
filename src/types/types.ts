@@ -2,10 +2,13 @@
 export type Action =
   | { type: "ADD_LIST"; payload: ListType }
   | { type: "DELETE_LIST"; payload: { idList: string } }
+  | { type: "UPDATE_LIST"; payload: { idList: string, data: Partial<List> } }
   | { type: "ADD_TASK"; payload: { idList: string; content: TaskType } }
+  | { type: "TOGGLE_LIST_COLLAPSE"; payload: { idList: string } }
   | { type: "UPDATE_TASK"; payload: { idList: string; data: Task } }
   | { type: "DELETE_TASK"; payload: { idList: string; idTask: string } }
-  | { type: "MOVE_TASK"; payload: { fromList: string; toList: string; idTask: string; fromIndex: number; toIndex: number } };
+  | { type: "MOVE_TASK"; payload: { fromList: string; toList: string; idTask: string; fromIndex: number; toIndex: number } }
+  | { type: "MOVE_LIST"; payload: { from: number; to: number } };
 
 export type Priority = "Low" | "Medium" | "High" | undefined;
 
@@ -22,6 +25,8 @@ export interface List {
   id: string;
   title: string;
   color?: string;
+  position: number;
+  collapse: boolean;
   tasks: Task[];
 }
 
@@ -47,33 +52,20 @@ export interface FormHandle {
   focus: (field: string) => void;
 }
 
-export interface TaskWithList extends Task {
-  listId: string;
-}
-
-export type DragTaskData = {
+export type DragTaskAndList = {
   listId: string;
   taskId?: string;
   index: number;
+  typeMovement: "Task" | "List";
 };
 
 export type DragAndDropTypes = {
-  dragData: DragTaskData | null;
-  dragOver: DragTaskData | null;
-  onDragStart: (e: React.DragEvent, data: DragTaskData) => void;
-  onDragEnter: (data: DragTaskData) => void;
+  dragData: DragTaskAndList | null;
+  dragOver: DragTaskAndList | null;
+  onDragStart: (e: React.DragEvent, data: DragTaskAndList) => void;
+  onDragEnter: (data: DragTaskAndList) => void;
   onDragEnd: () => void;
-  onDrop: (callback: (drag: DragTaskData, over: DragTaskData) => void) => void;
-};
-
-export type ActionsTask = {
-  onAddTask: (idList: string, data: TaskType) => void;
-  onUpdateTask: (idList: string, data: Task) => void;
-  onMoveTask: (
-    fromList: string,
-    toList: string,
-    taskId: string,
-    fromIndex: number,
-    toIndex: number
+  onDrop: (
+    callback: (drag: DragTaskAndList, over: DragTaskAndList) => void
   ) => void;
 };

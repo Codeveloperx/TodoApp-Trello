@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import type { DragTaskData, List } from "../types/types";
+import type { DragTaskAndList, List } from "@/types/types";
 
 export const usePreviewTask = (
   list: List,
-  dragData: DragTaskData | null,
-  dragOverData?: DragTaskData | null
+  dragData: DragTaskAndList | null,
+  dragOverData?: DragTaskAndList | null
 ) => {
   const originalTasks = useMemo(
     () => [...list.tasks].sort((a, b) => a.position - b.position),
@@ -22,7 +22,12 @@ export const usePreviewTask = (
     [dragData, dragOverData, list.id]
   );
 
+  const isMovementTypeTask = (): boolean => {
+    return dragData?.typeMovement === "Task";
+  };
+
   const previewTasks = useMemo(() => {
+    if (!isMovementTypeTask()) return originalTasks;
     if (!sameListDragging || !dragData || !dragOverData) return originalTasks;
 
     const from = dragData.index;
@@ -31,17 +36,21 @@ export const usePreviewTask = (
     if (from === to) return originalTasks;
 
     const preview = [...originalTasks];
-
     const [moved] = preview.splice(from, 1);
-
     const insertAt = Math.min(Math.max(0, to), preview.length);
-
     preview.splice(insertAt, 0, moved);
 
     return preview;
-  }, [sameListDragging, dragData, dragOverData, originalTasks]);
+  }, [
+    sameListDragging,
+    dragData,
+    dragOverData,
+    originalTasks,
+    isMovementTypeTask,
+  ]);
 
   const showDropzoneAtIndex = (index: number): boolean => {
+    if (!isMovementTypeTask()) return false;
     return (
       !!dragData &&
       dragOverData?.listId === list.id &&
@@ -50,6 +59,7 @@ export const usePreviewTask = (
   };
 
   const isDraggedTaskAtIndex = (index: number): boolean => {
+    if (!isMovementTypeTask()) return false;
     return (
       !!dragData &&
       previewTasks[index].id === dragData.taskId &&
@@ -58,10 +68,12 @@ export const usePreviewTask = (
   };
 
   const isTaskBeingDragged = (taskId: string): boolean => {
+    if (!isMovementTypeTask()) return false;
     return dragData?.taskId === taskId;
   };
 
   const showDropzoneAtEnd = (): boolean => {
+    if (!isMovementTypeTask()) return false;
     return (
       !!dragData &&
       dragOverData?.listId === list.id &&

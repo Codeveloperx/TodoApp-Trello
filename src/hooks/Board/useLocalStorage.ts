@@ -1,18 +1,17 @@
 import { useReducer, useEffect } from "react";
 import { boardReducer } from "@/context/boardReducer";
 import type { List } from "@/types/types";
-import { KEY_BOARD } from "@/constants/constant";
 
 const initialState: List[] = [];
 
-export const useLocalStorage = () => {
+export const useLocalStorage = (nameRef: string) => {
   const [state, dispatch] = useReducer(boardReducer, initialState, (init) => {
-    const saved = localStorage.getItem("board");
+    const saved = localStorage.getItem(nameRef);
     return saved ? (JSON.parse(saved) as List[]) : init;
   });
 
   useEffect(() => {
-    localStorage.setItem(KEY_BOARD, JSON.stringify(state));
+    localStorage.setItem(nameRef, JSON.stringify(state));
   }, [state]);
 
   return { state, dispatch };

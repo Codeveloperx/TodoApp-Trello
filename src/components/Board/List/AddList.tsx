@@ -10,7 +10,10 @@ type PropsType = {
 const AddList = (props: PropsType) => {
   const handleAddList = (values: Record<string, unknown>) => {
     if (!values) return;
-    props.onAddList({ ...values } as ListType);
+    props.onAddList({
+      ...values,
+      position: props.ListSize,
+    } as ListType);
   };
 
   const label = props.ListSize === 0 ? "Crea una lista" : "Añade otra lista";

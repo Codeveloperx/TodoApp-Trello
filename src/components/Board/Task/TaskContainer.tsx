@@ -1,17 +1,17 @@
 import TaskDraggable from "./TaskDraggable";
 import DropZone from "@/components/Common/DropZone/DropZone";
 import TaskCard from "./TaskCard";
-import type { DragTaskData, Task } from "@/types/types";
+import type { DragTaskAndList, Task } from "@/types/types";
 
 type PropsTypes = {
   tasks: Task[];
   listId: string;
-  dragData: DragTaskData | null;
+  dragData: DragTaskAndList | null;
   showDropzoneAtIndex: (index: number) => boolean;
   isDraggedTaskAtIndex: (index: number) => boolean;
   isTaskBeingDragged: (taskId: string) => boolean;
   showDropzoneAtEnd: () => boolean;
-  onDragStart: (e: React.DragEvent, data: DragTaskData) => void;
+  onDragStart: (e: React.DragEvent, data: DragTaskAndList) => void;
   onTaskDragEnter: (taskId: string, index: number) => void;
   onUpdateTask: (listId: string, data: Task) => void;
 };

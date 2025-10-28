@@ -1,5 +1,5 @@
 import DropZone from "@/components/Common/DropZone/DropZone";
-import type { DragTaskData, Task } from "@/types/types";
+import type { DragTaskAndList, Task } from "@/types/types";
 
 type PropsTypes = {
   children?: React.ReactNode;
@@ -8,7 +8,7 @@ type PropsTypes = {
   isDragging: boolean;
   showDropzone: boolean;
   isHidden: boolean;
-  onDragStart: (e: React.DragEvent, data: DragTaskData) => void;
+  onDragStart: (e: React.DragEvent, data: DragTaskAndList) => void;
   onDragEnter: () => void;
 };
 
@@ -31,6 +31,7 @@ const TaskDraggable = (props: PropsTypes) => {
               taskId: task.id,
               index: task.position,
               listId: listId,
+              typeMovement: "Task",
             })
           }
           className={`

@@ -1,27 +1,38 @@
-import { useBoard, useBoardActions, useDragAndDrop } from "@/hooks";
-import AddList from "./List/AddList";
-import ListContainer from "./List/ListContainer";
-import type { DragTaskData } from "@/types/types";
+import { BoardList } from "./BoardList";
+import { useBoard, useBoardActions } from "@/hooks";
+import { useBoardDnD } from "@/hooks/Board/useBoardDnD";
+import AddList from "../Board/List/AddList";
 
 const Board = () => {
-  const { state } = useBoard();
-  const dndState = useDragAndDrop<DragTaskData>();
-  const { addList, addTask, updateTask, moveTask } = useBoardActions();
+  const { state: lists } = useBoard();
+  const { addList, moveList } = useBoardActions();
+  const boardDnD = useBoardDnD({ lists, moveList });
 
   return (
-    <div className="flex gap-4 overflow-x-auto">
-      {state.map((it) => (
-        <div key={it.id}>
-          <ListContainer
-            list={it}
-            onAddTask={addTask}
-            onUpdateTask={updateTask}
-            onMoveTask={moveTask}
-            dndState={dndState}
-          />
-        </div>
+    <div
+      className="flex gap-4 overflow-x-auto p-4"
+      onDragEnd={boardDnD.handleDragEnd}
+    >
+      {boardDnD.previewLists.map((list, index) => (
+        <BoardList
+          key={list.id}
+          list={list}
+          previewIndex={index}
+          originalIndex={boardDnD.getOriginalIndex(list.id)}
+          isDragging={boardDnD.isListBeingDragged(list.id)}
+          onDragEnter={boardDnD.handleListDragEnter}
+          onDragOver={boardDnD.handleListDragOver}
+          onListDragStart={boardDnD.handleListDragStart}
+          dndState={boardDnD.dndState}
+        />
       ))}
-      <AddList ListSize={state.length} onAddList={addList} />
+
+      <div
+        onDragEnter={boardDnD.handleEndAreaDragEnter}
+        onDragOver={boardDnD.handleListDragOver}
+      >
+        <AddList ListSize={lists.length} onAddList={addList} />
+      </div>
     </div>
   );
 };

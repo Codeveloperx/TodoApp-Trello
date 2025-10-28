@@ -6,6 +6,9 @@ export const KEY_TITLE = "title";
 
 export const ADD_LIST = "ADD_LIST";
 export const DELETE_LIST = "DELETE_LIST";
+export const UPDATE_LIST = "UPDATE_LIST";
+export const TOGGLE_LIST_COLLAPSE = "TOGGLE_LIST_COLLAPSE";
+export const MOVE_LIST = "MOVE_LIST";
 export const ADD_TASK = "ADD_TASK";
 export const UPDATE_TASK = "UPDATE_TASK";
 export const MOVE_TASK = "MOVE_TASK";
@@ -14,7 +17,7 @@ export const DELETE_TASK = "DELETE_TASK";
 export const KEY_ENTER = "Enter";
 export const KEY_CANCEL = "Cancelar";
 export const KEY_SAVE = "Guardar";
-export const KEY_BOARD = "board";
+export const KEY_BOARD = "Board";
 
 export const FIELD_TEXT = "text";
 export const FIELD_TEXTAREA = "textarea";
