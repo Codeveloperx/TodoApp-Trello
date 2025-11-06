@@ -1,7 +1,7 @@
+import React, { Suspense, useEffect, useRef } from "react";
 import { FormWrapper } from "../Form/FormWrapper";
-import { useEffect, useRef } from "react";
+const Dialog = React.lazy(() => import("../Modal/Dialog"));
 import { useOpen } from "@/hooks";
-import Dialog from "../Modal/Dialog";
 import type { Fields, FormHandle } from "@/types/types";
 
 type PropsType = {
@@ -46,14 +46,16 @@ export const AddItem = (props: PropsType) => {
   return (
     <div>
       {isOpen ? (
-        <Dialog
-          onConfirm={handleAddList}
-          onCancel={onClose}
-          accept={props.accept}
-          cancel={props.cancel}
-        >
-          <FormWrapper ref={formRef} fields={props.form} />
-        </Dialog>
+        <Suspense fallback={<div>Cargando...</div>}>
+          <Dialog
+            onConfirm={handleAddList}
+            onCancel={onClose}
+            accept={props.accept}
+            cancel={props.cancel}
+          >
+            <FormWrapper ref={formRef} fields={props.form} />
+          </Dialog>
+        </Suspense>
       ) : (
         <div
           onClick={onOpen}

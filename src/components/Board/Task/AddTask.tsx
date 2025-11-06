@@ -1,6 +1,7 @@
 import { AddItem } from "@/components/Common/AddItem/AddItem";
 import formAddTask from "@/config/forms/addTask.json";
 import type { Fields, TaskType } from "@/types/types";
+import { memo } from "react";
 
 type PropsType = {
   idList: string;
@@ -8,7 +9,7 @@ type PropsType = {
   onAddTask: (idList: string, task: TaskType) => void;
 };
 
-export const AddTask = (props: PropsType) => {
+export const AddTask = memo((props: PropsType) => {
   const handleAddTask = (values: Record<string, unknown>) => {
     if (!values) return;
 
@@ -28,4 +29,4 @@ export const AddTask = (props: PropsType) => {
       />
     </div>
   );
-};
+});

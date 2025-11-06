@@ -1,0 +1,10 @@
+[
+  {
+    "name": "board_name",
+    "label": "Board Name",
+    "placeholder": "Personal Tasks, Work Projects",
+    "type": "text",
+    "required": true,
+    "errorMessage": "El campo Board Name es obligatorio"
+  }
+]

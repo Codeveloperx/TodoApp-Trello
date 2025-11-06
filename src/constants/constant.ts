@@ -13,11 +13,14 @@ export const ADD_TASK = "ADD_TASK";
 export const UPDATE_TASK = "UPDATE_TASK";
 export const MOVE_TASK = "MOVE_TASK";
 export const DELETE_TASK = "DELETE_TASK";
+export const CREATE_BOARD = "CREATE_BOARD";
+export const SWITCH_BOARD = "SWITCH_BOARD";
 
 export const KEY_ENTER = "Enter";
 export const KEY_CANCEL = "Cancelar";
 export const KEY_SAVE = "Guardar";
 export const KEY_BOARD = "Board";
+export const KEY_ESC = "Escape";
 
 export const FIELD_TEXT = "text";
 export const FIELD_TEXTAREA = "textarea";
@@ -30,3 +33,4 @@ export const KEY_LOW = "Low";
 export const KEY_MEDIUM = "Medium";
 export const KEY_HIGH = "High";
 export const KEY_NO_PRIORITY = "No priority";
+

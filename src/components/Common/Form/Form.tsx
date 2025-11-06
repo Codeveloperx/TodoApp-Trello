@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import type { Fields } from "../../../types/types";
 import { RenderField } from "./RenderField";
 
@@ -25,11 +25,14 @@ const Form = (props: PropsType) => {
     ...field,
   }));
 
-  const handleChange = (name: string, value: unknown) => {
-    const valuesField = { ...formValues, [name]: value };
-    setFormValues(valuesField);
-    props.onChange?.(valuesField);
-  };
+  const handleChange = useCallback(
+    (name: string, value: unknown) => {
+      const valuesField = { ...formValues, [name]: value };
+      setFormValues(valuesField);
+      props.onChange?.(valuesField);
+    },
+    [formValues]
+  );
 
   const handleFocus = (
     ref: React.RefObject<Record<string, HTMLInputElement | null>>,

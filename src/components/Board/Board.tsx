@@ -4,7 +4,9 @@ import { useBoardDnD } from "@/hooks/Board/useBoardDnD";
 import AddList from "../Board/List/AddList";
 
 const Board = () => {
-  const { state: lists } = useBoard();
+  const { currentBoard } = useBoard();
+  const lists = currentBoard?.lists || [];
+
   const { addList, moveList } = useBoardActions();
   const boardDnD = useBoardDnD({ lists, moveList });
 

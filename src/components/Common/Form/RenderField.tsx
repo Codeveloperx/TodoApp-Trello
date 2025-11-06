@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Checkbox } from "./Fields/Checkbox";
 import { ColorPicker } from "./Color/ColorPicker";
 import { NumberField } from "./Fields/NumberField";
@@ -21,7 +22,7 @@ type RenderFieldProps = {
   inputRef?: (element: HTMLInputElement | null) => void;
 };
 
-export const RenderField = (props: RenderFieldProps) => {
+export const RenderField = memo((props: RenderFieldProps) => {
   const renderer = fieldRenderers[props.field.type];
 
   if (!renderer) {
@@ -30,7 +31,7 @@ export const RenderField = (props: RenderFieldProps) => {
   }
 
   return <>{renderer(props)}</>;
-};
+});
 
 //prettier-ignore
 const fieldRenderers: Record<string, (props: RenderFieldProps) => React.ReactNode> = {
